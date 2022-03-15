@@ -1,13 +1,48 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Color Theme Swatches in Hex */
+.Copy-of-Teal-1-hex {
+  color: #eddb0c;
+}
+.Copy-of-Teal-2-hex {
+  color: #33334c;
+}
+.Copy-of-Teal-3-hex {
+  color: #53b39e;
+}
+.Copy-of-Teal-4-hex {
+  color: #a8ffd0;
+}
+
+/* Color Theme Swatches in Hex */
+.Hyperframe-Interactive-Experience-1-hex {
+  color: #ccf244;
+}
+.Hyperframe-Interactive-Experience-2-hex {
+  color: #818c2b;
+}
+.Hyperframe-Interactive-Experience-3-hex {
+  color: #52591d;
+}
+.Hyperframe-Interactive-Experience-4-hex {
+  color: #edf250;
+}
+.Hyperframe-Interactive-Experience-5-hex {
+  color: #0d0d0d;
 }
