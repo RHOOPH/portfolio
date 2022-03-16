@@ -4,7 +4,7 @@ import { ThemeContext } from "./themeContext"
 
 import { useContext } from "react"
 
-const About = styled.div`
+const Nav = styled.div`
   font-size: max(calc(5.5vw * 0.35), 1rem);
   font-family: ${({ theme }) => theme.fontfamily1};
   position: fixed;
@@ -43,10 +43,10 @@ const Overlay = () => {
     <>
       <Wave />
       <Wave bottom />
-      <About theme={theme}>
+      <Nav theme={theme}>
         <div>About</div>
         <div>Projects</div>
-      </About>
+      </Nav>
     </>
   )
 }

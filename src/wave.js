@@ -4,6 +4,7 @@ import { useContext } from "react"
 
 const Container = styled.div`
   position: fixed;
+  z-index: 15;
   width: 100%;
   height: 50px;
   ${({ bottom }) =>
@@ -13,7 +14,7 @@ const Container = styled.div`
     `
       : `transform:rotate(180deg);
     top:0;`}
-`     
+`
 
 const Wave = (props) => {
   const { theme } = useContext(ThemeContext)
