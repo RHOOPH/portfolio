@@ -1,11 +1,15 @@
 import { createContext, useState } from "react"
 const ThemeContext = createContext()
 const defaultTheme = {
-  primary: "#4067A8",
-  accent1: "#86585E",
+  accent1: "#4067A8",
   accent2: "#81A3B7",
-  background1: "#FAFAFA",
-  background2: "#1B2037",
+  light: "#FAFAFA",
+  primary: "#1B2037",
+  primaryDarkShadow: "#121625",
+  primaryLightShadow: "#242a49",
+  secondary: "#1E3A45",
+  secondaryDarkShadow: "#172d35",
+  secondaryLightShadow: "#254755",
   fontfamily1: '"Righteous", cursive',
   fontfamily2: '"Inter",sans-serif',
 }

@@ -1,6 +1,6 @@
 import Wave from "./wave"
 import styled from "styled-components"
-import { ThemeContext } from "./themeContext"
+import { ThemeContext } from "../themeContext"
 
 import { useContext } from "react"
 
@@ -10,7 +10,7 @@ const Nav = styled.div`
   position: fixed;
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.accent1};
   top: 50%;
   transform: translateY(-50%);
   width: 100%;

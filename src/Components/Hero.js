@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { ThemeContext } from "./themeContext"
+import { ThemeContext } from "../themeContext"
 import { useContext } from "react"
 
 const Box = styled.div`
@@ -15,7 +15,7 @@ const Box = styled.div`
 
   font-family: ${({ theme }) => theme.fontfamily1};
   font-size: max(5.5vw, 45px);
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.accent1};
   line-height: 1;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `

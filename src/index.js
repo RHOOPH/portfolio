@@ -1,12 +1,13 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import "./index.css"
 import App from "./App"
+import GlobalStyles from "./GlobalStyles"
 import { ThemeContextProvider } from "./themeContext"
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeContextProvider>
+      <GlobalStyles />
       <App />
     </ThemeContextProvider>
   </React.StrictMode>,
