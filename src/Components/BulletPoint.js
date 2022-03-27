@@ -12,7 +12,13 @@ const Container = styled.div`
   /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
   margin: 1rem;
   /* overflow: hidden; */
-  ${({ end }) => end && "align-self:flex-end;"}
+  @media (min-width: 670px) {
+    ${({ end }) => end && "align-self:flex-end;"}
+  }
+  @media (max-width: 669px) {
+    flex-direction: column;
+    margin: 2rem 0;
+  }
 `
 const Header = styled.div`
   background: ${({ theme }) => theme.primary};
@@ -22,6 +28,7 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 
   box-shadow: 15px 15px 30px ${({ theme }) => theme.primaryDarkShadow},
     -15px -15px 30px ${({ theme }) => theme.primaryLightShadow};
@@ -29,7 +36,12 @@ const Header = styled.div`
   aspect-ratio: 1/1;
   min-width: 180px;
   border-radius: 50%;
-  ${({ end }) => end && "order:2;"}
+  @media (min-width: 670px) {
+    ${({ end }) => end && "order:2;"}
+  }
+  @media (max-width: 669px) {
+    margin-bottom: 1rem;
+  }
 `
 const Body = styled.div`
   padding: 0 2em;
@@ -38,6 +50,9 @@ const Body = styled.div`
   max-width: 35ch;
   font-weight: 500;
   line-height: 1.4;
+  @media (max-width: 669px) {
+    text-align: justify;
+  }
 `
 
 const BulletPoint = ({ title, content, className, end }) => {

@@ -11,6 +11,10 @@ const Container = styled.div`
   font-size: 1rem;
   background-color: ${({ theme }) => theme.primary};
   padding: 5rem;
+  @media (max-width: 669px) {
+    padding: 0;
+    align-items: center;
+  }
 `
 
 const About = () => {

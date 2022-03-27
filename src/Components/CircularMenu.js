@@ -4,17 +4,17 @@ import { useContext } from "react"
 
 const Circle = styled.div`
   position: relative;
-  margin: 0 5vw;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${({ diameter }) => diameter}vw;
-  height: ${({ diameter }) => diameter}vw;
+  width: ${({ diameter }) => diameter}px;
+  height: ${({ diameter }) => diameter}px;
 `
 const Title = styled.div`
   position: absolute;
   aspect-ratio: 1/1;
-  min-width: ${({ diameter }) => diameter / 3}vw;
+  min-width: ${({ diameter }) => diameter / 3}px;
 
   display: flex;
   justify-content: center;
@@ -34,15 +34,15 @@ const Title = styled.div`
 `
 const Item = styled.div`
   position: absolute;
-  transform-origin: ${({ diameter }) => diameter / 2}vw;
+  transform-origin: ${({ diameter }) => diameter / 2}px;
 
   transform: rotate(${({ n, position }) => (360 / n) * position}deg);
   left: 0;
 
   & svg {
     transform: rotate(${({ n, position }) => (-360 / n) * position}deg);
-    height: 3.5vw;
-    width: 3.5vw;
+    height: 50px;
+    width: 50px;
     transition: transform 0.2s;
 
     &:hover {

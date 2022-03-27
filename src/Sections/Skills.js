@@ -18,9 +18,12 @@ import { ReactComponent as ReactRouter } from "../assets/react-router.svg"
 const Container = styled.div`
   position: relative;
   min-height: 100vh;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   align-items: center;
-  justify-content: center;
+  justify-items: center;
+  grid-gap: 50px;
+  padding: 1rem;
   background-color: ${({ theme }) => theme.secondary};
 `
 const Skills = () => {
@@ -29,8 +32,8 @@ const Skills = () => {
   const toolsArray = [VSCode, Firefox, CRA, Github, Yarn, Figma]
   return (
     <Container theme={theme}>
-      <CircularMenu icons={techArray} title="TechStack" diameter={25} />
-      <CircularMenu icons={toolsArray} title="Tools" diameter={25} />
+      <CircularMenu icons={techArray} title="TechStack" diameter={350} />
+      <CircularMenu icons={toolsArray} title="Tools" diameter={350} />
     </Container>
   )
 }

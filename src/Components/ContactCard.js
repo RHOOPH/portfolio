@@ -8,6 +8,10 @@ const Card = styled.div`
   border-radius: 20px;
   box-shadow: 15px 15px 30px ${({ theme }) => theme.primaryDarkShadow},
     -15px -15px 30px ${({ theme }) => theme.primaryLightShadow};
+  @media (max-width: 599px) {
+    flex-direction: column;
+  }
+
   & > div:first-child {
     padding: 15px;
   }
@@ -40,6 +44,11 @@ const Info = styled.div`
   & > div {
     display: flex;
     flex-flow: column;
+  }
+  & h5 {
+    @media (max-width: 599px) {
+      display: inline-block;
+    }
   }
 `
 const Contact = styled.div`
