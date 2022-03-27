@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.js": "/portfolio/static/js/main.3be2bb56.js",
+    "static/media/Screenshot-E-cart.png": "/portfolio/static/media/Screenshot-E-cart.e38df9f088b15bd16e7e.png",
+    "static/media/Screenshot-React-Ekart.png": "/portfolio/static/media/Screenshot-React-Ekart.25a93b817a7ff3fc74cd.png",
+    "static/media/Screenshot-Quiz-App.png": "/portfolio/static/media/Screenshot-Quiz-App.164c9d627fd26161914b.png",
+    "static/media/firefox-developer-edition.svg": "/portfolio/static/media/firefox-developer-edition.677fbc18bd99094f3ff61092b165dc3d.svg",
+    "static/media/create-react-app.svg": "/portfolio/static/media/create-react-app.d3531aeba7ef705bd982c16af3b20faa.svg",
+    "static/media/react.svg": "/portfolio/static/media/react.f6917a7f1ad3de3808a1fdf933617106.svg",
+    "static/media/react-router.svg": "/portfolio/static/media/react-router.7f2e263f483c9280a8bd0af2e3c6a4a7.svg",
+    "static/media/bootstrap.svg": "/portfolio/static/media/bootstrap.46e166ca9591bcc3873daf2486df5473.svg",
+    "static/media/yarn.svg": "/portfolio/static/media/yarn.febc1466245e08c3bd7e240328ca04ad.svg",
+    "static/media/github.svg": "/portfolio/static/media/github.69cb85c2a9dfc083f69d2f29341c664b.svg",
+    "static/media/vscode.svg": "/portfolio/static/media/vscode.aff129777ab871f38c723983aa6e412d.svg",
+    "static/media/html5.svg": "/portfolio/static/media/html5.dc12f4d091acafc24066e92fe61d4276.svg",
+    "index.html": "/portfolio/index.html",
+    "static/media/js.svg": "/portfolio/static/media/js.a1b4cf4cecec70fb7f6a66c8e1a20212.svg",
+    "static/media/figma.svg": "/portfolio/static/media/figma.aa8b47f4f6e0492ecbf8bd8df5f2243f.svg",
+    "static/media/css3.svg": "/portfolio/static/media/css3.638c48149d955d57b307a9357ac5060c.svg",
+    "main.3be2bb56.js.map": "/portfolio/static/js/main.3be2bb56.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.3be2bb56.js"
+  ]
+}
