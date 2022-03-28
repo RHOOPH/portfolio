@@ -8,7 +8,7 @@ import { useContext } from "react"
 const Container = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100vw), 1fr));
   background-color: ${({ theme }) => theme.secondary};
   min-height: 100vh;
   align-items: center;

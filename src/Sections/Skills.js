@@ -19,11 +19,10 @@ const Container = styled.div`
   position: relative;
   min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100vw), 1fr));
   align-items: center;
   justify-items: center;
   grid-gap: 50px;
-  padding: 1rem;
   background-color: ${({ theme }) => theme.secondary};
 `
 const Skills = () => {

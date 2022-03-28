@@ -15,7 +15,7 @@ const Container = styled.div`
 `
 const Header = styled.div`
   height: 100%;
-  padding: 0 1rem;
+  padding-left: 1rem;
   border-right: 0;
 
   display: flex;
@@ -28,7 +28,7 @@ const Button = styled.div`
   background: ${({ theme }) => theme.primary};
   color: ${({ theme }) => theme.light};
   font-family: ${({ theme }) => theme.fontfamily2};
-  letter-spacing: 0.15em;
+  /* letter-spacing: 0.15em; */
   margin: 0.5em 0;
   text-align: center;
   width: 100%;

@@ -4,12 +4,12 @@ import { useContext } from "react"
 
 const Circle = styled.div`
   position: relative;
-
+  --width: min(${({ diameter }) => diameter}px, 95vw);
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${({ diameter }) => diameter}px;
-  height: ${({ diameter }) => diameter}px;
+  width: var(--width);
+  height: var(--width);
 `
 const Title = styled.div`
   position: absolute;
@@ -34,8 +34,7 @@ const Title = styled.div`
 `
 const Item = styled.div`
   position: absolute;
-  transform-origin: ${({ diameter }) => diameter / 2}px;
-
+  transform-origin: calc(var(--width) / 2);
   transform: rotate(${({ n, position }) => (360 / n) * position}deg);
   left: 0;
 

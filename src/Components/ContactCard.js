@@ -8,6 +8,7 @@ const Card = styled.div`
   border-radius: 20px;
   box-shadow: 15px 15px 30px ${({ theme }) => theme.primaryDarkShadow},
     -15px -15px 30px ${({ theme }) => theme.primaryLightShadow};
+  margin: 1rem;
   @media (max-width: 599px) {
     flex-direction: column;
   }
