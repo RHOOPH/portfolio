@@ -33,14 +33,16 @@ const Header = styled.div`
   box-shadow: 15px 15px 30px ${({ theme }) => theme.primaryDarkShadow},
     -15px -15px 30px ${({ theme }) => theme.primaryLightShadow};
   padding: 1rem;
-  aspect-ratio: 1/1;
   min-width: 180px;
+  aspect-ratio: 1/1;
   border-radius: 50%;
   @media (min-width: 670px) {
     ${({ end }) => end && "order:2;"}
   }
   @media (max-width: 669px) {
     margin-bottom: 1rem;
+    /* aspect ratio not working in chrome when width is not set (only when flex-direction changes to column)  */
+    width: max-content;
   }
 `
 const Body = styled.div`
