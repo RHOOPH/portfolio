@@ -5,7 +5,8 @@ import { useContext } from "react"
 const Container = styled.div`
   display: flex;
   height: 250px;
-
+  padding: 1rem;
+  position: relative;
   background-color: ${({ theme }) => theme.secondary};
   border-radius: 5px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -15,7 +16,7 @@ const Container = styled.div`
 `
 const Header = styled.div`
   height: 100%;
-  padding-left: 1rem;
+  /* padding-left: 1rem; */
   border-right: 0;
 
   display: flex;
@@ -38,9 +39,10 @@ const Button = styled.div`
   border-radius: 10px;
 `
 const Body = styled.div`
-  position: relative;
-  padding: 1rem;
+  /* position: relative; */
+  /* padding: 1rem; */
   flex-grow: 1;
+  ${({ end }) => (end ? "padding-right:1rem;" : "padding-left:1rem;")}
   & div {
     font-size: 1.2rem;
     position: absolute;

@@ -14,16 +14,22 @@ import { ReactComponent as CSS3 } from "../assets/css3.svg"
 import { ReactComponent as JS } from "../assets/js.svg"
 import { ReactComponent as ReactLogo } from "../assets/react.svg"
 import { ReactComponent as ReactRouter } from "../assets/react-router.svg"
+import SectionTitle from "../Components/SectionTitle"
 
 const Container = styled.div`
-  position: relative;
-  min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100vw), 1fr));
-  align-items: center;
-  justify-items: center;
-  grid-gap: 50px;
+  grid-template-rows: min-content;
   background-color: ${({ theme }) => theme.secondary};
+  min-height: 100vh;
+  & > div {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100vw), 1fr));
+    align-items: center;
+    justify-items: center;
+    grid-gap: 50px;
+  }
 `
 const Skills = () => {
   const { theme } = useContext(ThemeContext)
@@ -31,8 +37,13 @@ const Skills = () => {
   const toolsArray = [VSCode, Firefox, CRA, Github, Yarn, Figma]
   return (
     <Container theme={theme}>
-      <CircularMenu icons={techArray} title="TechStack" diameter={350} />
-      <CircularMenu icons={toolsArray} title="Tools" diameter={350} />
+      <SectionTitle theme={theme} secondary>
+        Skills
+      </SectionTitle>
+      <div>
+        <CircularMenu icons={techArray} title="TechStack" diameter={350} />
+        <CircularMenu icons={toolsArray} title="Tools" diameter={350} />
+      </div>
     </Container>
   )
 }
