@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { ThemeContext } from "../themeContext"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 
 const Container = styled.div`
   display: flex;
@@ -26,15 +26,20 @@ const Header = styled.div`
   ${({ end }) => end && "order:2;"}
 `
 const Button = styled.div`
-  background: ${({ theme }) => theme.primary};
+  background: ${({ theme, active }) =>
+    active ? theme.primary : theme.secondary};
   color: ${({ theme }) => theme.light};
   font-family: ${({ theme }) => theme.fontfamily2};
   /* letter-spacing: 0.15em; */
   margin: 0.5em 0;
   text-align: center;
   width: 100%;
-  box-shadow: 8px 8px 16px 0px ${({ theme }) => theme.secondaryDarkShadow};
+  text-decoration: none;
 
+  box-shadow: 4px 4px 8px ${({ theme }) => theme.secondaryDarkShadow},
+    -4px -4px 8px ${({ theme }) => theme.secondaryLightShadow};
+
+  cursor: pointer;
   padding: 1rem;
   border-radius: 10px;
 `
@@ -42,19 +47,21 @@ const Body = styled.div`
   /* position: relative; */
   /* padding: 1rem; */
   flex-grow: 1;
-  ${({ end }) => (end ? "padding-right:1rem;" : "padding-left:1rem;")}
-  & div {
-    font-size: 1.2rem;
-    position: absolute;
-    padding: 1rem;
-    bottom: 0;
-    ${({ end }) => (end ? "left:0;" : "right:0;")}
-    border-radius: 5px;
-    background-color: ${({ theme }) => theme.secondary};
-    color: ${({ theme }) => theme.light};
-    font-family: ${({ theme }) => theme.fontfamily1};
-    letter-spacing: 0.15em;
-  }
+  ${({ end }) => (end ? "margin-right:1rem;" : "margin-left:1rem;")}
+`
+const Title = styled.div`
+  font-size: 1.2rem;
+  position: absolute;
+  padding: 1rem;
+  bottom: 0;
+  ${({ end }) => (end ? "left:0;" : "right:0;")}
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.secondary};
+  color: ${({ theme }) => theme.light};
+  font-family: ${({ theme }) => theme.fontfamily1};
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  text-decoration: none;
 `
 const Preview = styled.img`
   width: 100%;
@@ -62,21 +69,85 @@ const Preview = styled.img`
   object-fit: cover;
   object-position: top;
   border-radius: 5px;
+  cursor: pointer;
+`
+const Description = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.light};
+  color: ${({ theme }) => theme.primary};
+  padding: 1em;
+  border-radius: 5px;
 `
 
-const Card = ({ title, className, preview, end }) => {
+const Card = ({
+  title,
+  className,
+  preview,
+  end,
+  description,
+  codeLink,
+  siteLink,
+}) => {
   const { theme } = useContext(ThemeContext)
+  const [section, setSection] = useState(1)
+
+  const switchSection = (e) => {
+    console.log(parseInt(e.target.id))
+    setSection(parseInt(e.target.id))
+  }
+  console.log("section=", section)
   return (
     <Container theme={theme} className={className}>
       <Header end={end}>
-        <Button theme={theme}>Preview</Button>
-        <Button theme={theme}>Description</Button>
-        <Button theme={theme}>Code</Button>
+        <Button
+          theme={theme}
+          onClick={switchSection}
+          id={1}
+          active={section === 1}
+        >
+          Preview
+        </Button>
+        <Button
+          theme={theme}
+          onClick={switchSection}
+          id={2}
+          active={section === 2}
+        >
+          Description
+        </Button>
+        <Button
+          as="a"
+          theme={theme}
+          href={codeLink}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          Code
+        </Button>
       </Header>
 
       <Body theme={theme} end={end}>
-        <Preview src={preview} alt={title} />
-        <div>{title}</div>
+        {section === 1 && (
+          <a href={siteLink} target="_blank" rel="noreferrer noopener">
+            <Preview src={preview} alt={title} />
+          </a>
+        )}
+        {section === 2 && (
+          <Description theme={theme}>
+            <div>{description}</div>
+          </Description>
+        )}
+        <Title
+          end={end}
+          theme={theme}
+          as="a"
+          href={siteLink}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          {title}
+        </Title>
       </Body>
     </Container>
   )

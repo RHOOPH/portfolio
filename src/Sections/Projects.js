@@ -28,9 +28,27 @@ const Projects = () => {
         Projects
       </SectionTitle>
       <Grid>
-        <Card title="E-Kart" preview={ReactEkartImg} />
-        <Card title="Quiz Time" preview={QuizTimeImg} />
-        <Card title="E-Kart" preview={EkartImg} />
+        <Card
+          title="E-Kart"
+          preview={ReactEkartImg}
+          description="Mock-up of FlipKart built using React, react-bootstrap"
+          codeLink="https://github.com/RHOOPH/E-kart"
+          siteLink="https://rhooph.github.io/E-kart"
+        />
+        <Card
+          title="Quiz Time"
+          preview={QuizTimeImg}
+          description="App that tests your knowledge about variety of topics through Questionair"
+          codeLink="https://github.com/RHOOPH/quiztime"
+          siteLink="https://rhooph.github.io/quiztime"
+        />
+        <Card
+          title="E-Kart"
+          preview={EkartImg}
+          description="Mock-up of FlipKart built using bootstrap"
+          codeLink="https://github.com/RHOOPH/CredenceMind"
+          siteLink="https://rhooph.github.io/CredenceMind"
+        />
       </Grid>
     </Container>
   )
