@@ -51,6 +51,11 @@ const Info = styled.div`
       display: inline-block;
     }
   }
+  & p {
+    margin: 0;
+    font-size: 0.7rem;
+    max-width: 20ch;
+  }
 `
 const Contact = styled.div`
   padding: 2em;
@@ -78,9 +83,12 @@ const ContactCard = ({ theme }) => {
           <div>
             <h5>Preferred City:</h5>
             <span>Bangalore,KA</span>
-            <h5>Alternate Cities:</h5>
-            <span>Chennai,TN</span>
-            <span>Hyderabad,AP</span>
+            <h5>Work Experience:</h5>
+            <div>
+              <p>
+                1.5 years as an Associate in the field of Labour Law Compliance
+              </p>
+            </div>
           </div>
         </Info>
       </div>
