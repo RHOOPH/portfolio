@@ -6,12 +6,9 @@ const Container = styled.div`
   display: flex;
 
   align-items: center;
-  min-height: 175px;
-  /* background-color: ${({ theme }) => theme.accent1}; */
-  border-radius: 20px;
-  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+
   margin: 1rem;
-  /* overflow: hidden; */
+
   @media (min-width: 670px) {
     ${({ end }) => end && "align-self:flex-end;"}
   }
@@ -42,7 +39,7 @@ const Header = styled.div`
   @media (max-width: 669px) {
     margin-bottom: 1rem;
     /* aspect ratio not working in chrome when width is not set (only when flex-direction changes to column)  */
-    width: max-content;
+    /* width: max-content; */
   }
 `
 const Body = styled.div`
