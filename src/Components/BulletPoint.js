@@ -39,7 +39,7 @@ const Header = styled.div`
   @media (max-width: 669px) {
     margin-bottom: 1rem;
     /* aspect ratio not working in chrome when width is not set (only when flex-direction changes to column)  */
-    /* width: max-content; */
+    width: max-content;
   }
 `
 const Body = styled.div`
