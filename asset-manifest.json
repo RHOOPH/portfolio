@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/portfolio/static/js/main.820a0bd7.js",
+    "main.js": "/portfolio/static/js/main.b2ddaa13.js",
     "static/media/Screenshot-E-cart.png": "/portfolio/static/media/Screenshot-E-cart.e38df9f088b15bd16e7e.png",
     "static/media/Screenshot-React-Ekart.png": "/portfolio/static/media/Screenshot-React-Ekart.25a93b817a7ff3fc74cd.png",
     "static/media/Screenshot-Quiz-App.png": "/portfolio/static/media/Screenshot-Quiz-App.164c9d627fd26161914b.png",
@@ -12,14 +12,14 @@
     "static/media/yarn.svg": "/portfolio/static/media/yarn.febc1466245e08c3bd7e240328ca04ad.svg",
     "static/media/github.svg": "/portfolio/static/media/github.69cb85c2a9dfc083f69d2f29341c664b.svg",
     "static/media/vscode.svg": "/portfolio/static/media/vscode.aff129777ab871f38c723983aa6e412d.svg",
-    "static/media/html5.svg": "/portfolio/static/media/html5.dc12f4d091acafc24066e92fe61d4276.svg",
     "index.html": "/portfolio/index.html",
+    "static/media/html5.svg": "/portfolio/static/media/html5.dc12f4d091acafc24066e92fe61d4276.svg",
     "static/media/js.svg": "/portfolio/static/media/js.a1b4cf4cecec70fb7f6a66c8e1a20212.svg",
     "static/media/figma.svg": "/portfolio/static/media/figma.aa8b47f4f6e0492ecbf8bd8df5f2243f.svg",
     "static/media/css3.svg": "/portfolio/static/media/css3.638c48149d955d57b307a9357ac5060c.svg",
-    "main.820a0bd7.js.map": "/portfolio/static/js/main.820a0bd7.js.map"
+    "main.b2ddaa13.js.map": "/portfolio/static/js/main.b2ddaa13.js.map"
   },
   "entrypoints": [
-    "static/js/main.820a0bd7.js"
+    "static/js/main.b2ddaa13.js"
   ]
 }
