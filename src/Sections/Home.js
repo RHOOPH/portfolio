@@ -9,9 +9,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.primary};
+  overflow: hidden;
 `
 const Home = () => {
   const { theme } = useContext(ThemeContext)
+
   return (
     <Container theme={theme}>
       <Hero />

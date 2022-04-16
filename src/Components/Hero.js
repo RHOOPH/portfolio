@@ -9,7 +9,7 @@ import {
   useSpringRef,
 } from "@react-spring/web"
 
-const Box = styled.div`
+const Box = styled(animated.div)`
   position: relative;
   display: inline-grid;
   grid-template: 1fr 1fr 1.2fr / 2ch auto;
@@ -66,16 +66,17 @@ const Quote = styled(animated.div)`
 const Hero = () => {
   const { theme } = useContext(ThemeContext)
   const ref1 = useSpringRef()
-  const ref2 = useSpringRef()
-  const ref3 = useSpringRef()
-  const ref4 = useSpringRef()
-
   const anime1 = useSpring({
     from: { rotateZ: 90, x: 100, scale: 0 },
-    to: [{ scale: 2 }, { rotateZ: 0, scale: 1 }, { x: 0, scale: 1 }],
+    to: [
+      { scale: 2, delay: 500 },
+      { rotateZ: 0, scale: 1 },
+      { x: 0, scale: 1 },
+    ],
     config: config.slow,
     ref: ref1,
   })
+  const ref2 = useSpringRef()
   const anime2 = useSpring({
     from: { transformOrigin: "center", x: 100, scale: 2, rotateX: 90, y: 0 },
     to: [
@@ -85,17 +86,19 @@ const Hero = () => {
     config: config.slow,
     ref: ref2,
   })
+  const ref3 = useSpringRef()
   const anime3 = useSpring({
     from: { x: 100, scale: 0 },
     to: [{ scale: 1 }, { x: 0 }],
     ref: ref3,
   })
+  const ref4 = useSpringRef()
   const anime4 = useSpring({
     from: { x: 100, scale: 0 },
     to: [{ scale: 1 }, { x: 0 }],
     ref: ref4,
   })
-  useChain([ref1, ref2, ref3, ref4], [0, 0.5, 1, 1.5], 2000)
+  useChain([ref1, ref2, ref3, ref4], [0, 0.75, 1.25, 1.5], 2000)
 
   return (
     <>

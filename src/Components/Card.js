@@ -93,10 +93,9 @@ const Card = ({
   const [section, setSection] = useState(1)
 
   const switchSection = (e) => {
-    console.log(parseInt(e.target.id))
     setSection(parseInt(e.target.id))
   }
-  console.log("section=", section)
+
   return (
     <Container theme={theme} className={className}>
       <Header end={end}>
