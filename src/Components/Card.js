@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { ThemeContext } from "../themeContext"
 import { useContext, useState } from "react"
+import { ReactComponent as ExtLink } from "../assets/external-link.svg"
 
 const Container = styled.div`
   display: flex;
@@ -42,6 +43,10 @@ const Button = styled.div`
   cursor: pointer;
   padding: 1rem;
   border-radius: 10px;
+  & span,
+  svg {
+    vertical-align: middle;
+  }
 `
 const Body = styled.div`
   /* position: relative; */
@@ -62,6 +67,10 @@ const Title = styled.div`
   letter-spacing: 0.15em;
   cursor: pointer;
   text-decoration: none;
+  & span,
+  svg {
+    vertical-align: middle;
+  }
 `
 const Preview = styled.img`
   width: 100%;
@@ -122,7 +131,8 @@ const Card = ({
           target="_blank"
           rel="noreferrer noopener"
         >
-          Code
+          <span>Code </span>
+          <ExtLink height="16" width="16" fill={theme.light} />
         </Button>
       </Header>
 
@@ -145,7 +155,8 @@ const Card = ({
           target="_blank"
           rel="noreferrer noopener"
         >
-          {title}
+          <span>{title}</span>
+          <ExtLink height="16" width="16" fill={theme.light} />
         </Title>
       </Body>
     </Container>
