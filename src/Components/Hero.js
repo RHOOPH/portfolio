@@ -9,7 +9,7 @@ import {
   useSpringRef,
 } from "@react-spring/web"
 
-const Box = styled(animated.div)`
+const Box = styled.div`
   position: relative;
   display: inline-grid;
   grid-template: 1fr 1fr 1.2fr / 2ch auto;
