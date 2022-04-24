@@ -33,6 +33,8 @@ const Title = styled(animated.div)`
   font-size: 1rem;
   border-radius: 50%;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 `
 const Item = styled(animated.div)`
   position: absolute;
@@ -124,6 +126,8 @@ const CircularMenu = ({ icons, title, diameter }) => {
         style={style}
         onMouseDown={mouseDown}
         onMouseUp={mouseUp}
+        onTouchStart={mouseDown}
+        onTouchEnd={mouseUp}
       >
         <span>{title}</span>
         <Waypoint onEnter={handleEnter} topOffset="20%" bottomOffset="20%" />

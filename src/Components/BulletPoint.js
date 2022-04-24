@@ -38,6 +38,7 @@ const Header = styled.div`
   min-width: 180px;
   aspect-ratio: 1/1;
   border-radius: 50%;
+  user-select: none;
   @media (min-width: 670px) {
     ${({ align }) => align === "end" && "order:2;"}
   }
