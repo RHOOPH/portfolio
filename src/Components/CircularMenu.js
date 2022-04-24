@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { ThemeContext } from "../themeContext"
-import { useContext } from "react"
+import { useContext, useState, useRef } from "react"
+import { animated, useSprings, config } from "@react-spring/web"
+import { Waypoint } from "react-waypoint"
 
 const Circle = styled.div`
   position: relative;
@@ -29,14 +31,12 @@ const Title = styled.div`
   font-weight: 500;
   font-size: 1rem;
   border-radius: 50%;
+  cursor: pointer;
   box-shadow: 10px 10px 20px ${({ theme }) => theme.secondaryDarkShadow},
     -10px -10px 20px ${({ theme }) => theme.secondaryLightShadow};
 `
-const Item = styled.div`
+const Item = styled(animated.div)`
   position: absolute;
-  transform-origin: calc(var(--width) / 2);
-  transform: rotate(${({ n, position }) => (360 / n) * position}deg);
-  left: 0;
 
   & svg {
     transform: rotate(${({ n, position }) => (-360 / n) * position}deg);
@@ -53,18 +53,67 @@ const Item = styled.div`
 
 const CircularMenu = ({ icons, title, diameter }) => {
   const { theme } = useContext(ThemeContext)
+  const [open, setOpen] = useState(false)
+  const itemsRef = useRef([])
+  const shown = useRef(false)
+  const [spin, spinAPI] = useSprings(icons.length, (i) => ({}))
 
-  const elements = icons.map((Icon, i, arr) => (
-    <Item position={i} key={i} diameter={diameter} n={arr.length}>
+  const items = icons.map((Icon, i, arr) => (
+    <Item
+      position={i}
+      key={i}
+      diameter={diameter}
+      n={arr.length}
+      ref={(el) => (itemsRef.current[i] = el)}
+      style={spin[i]}
+    >
       <Icon />
     </Item>
   ))
+
+  const startSpin = (reverse) => {
+    spinAPI.start((i) => {
+      let delay = 100
+      return {
+        from: {
+          transformOrigin: `min(0px, 0vw)`,
+          left: `min(${diameter / 2}px, 47vw)`,
+          rotate: 0,
+        },
+        to: {
+          transformOrigin: `min(${diameter / 2}px, 47vw)`,
+          left: `min(0px, 0vw)`,
+          rotate: (360 / icons.length) * i + 360,
+        },
+        delay: reverse ? (icons.length - 1) * delay - i * delay : i * delay,
+
+        config: reverse ? config.molasses : config.slow,
+        reverse: reverse,
+      }
+    })
+  }
+
+  const runAnimation = () => {
+    startSpin(open)
+
+    setOpen((p) => !p)
+  }
+
+  const handleEnter = (a) => {
+    if (!shown.current) {
+      runAnimation()
+      shown.current = true
+    }
+  }
+
   return (
-    <Circle n={elements.length} theme={theme} diameter={diameter}>
-      <Title theme={theme} diameter={diameter}>
+    <Circle n={items.length} theme={theme} diameter={diameter}>
+      <Title theme={theme} diameter={diameter} onClick={runAnimation}>
         <span>{title}</span>
+        <Waypoint onEnter={handleEnter} />
       </Title>
-      {elements}
+
+      {items}
     </Circle>
   )
 }
