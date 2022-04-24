@@ -66,6 +66,7 @@ const CircularMenu = ({ icons, title, diameter }) => {
       n={arr.length}
       ref={(el) => (itemsRef.current[i] = el)}
       style={spin[i]}
+      onClick={() => runAnimation()}
     >
       <Icon />
     </Item>
