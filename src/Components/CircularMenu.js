@@ -3,6 +3,7 @@ import { ThemeContext } from "../themeContext"
 import { useContext, useState, useRef } from "react"
 import { animated, useSprings, config } from "@react-spring/web"
 import { Waypoint } from "react-waypoint"
+import useClickAnimation from "../useClickAnimation"
 
 const Circle = styled.div`
   position: relative;
@@ -13,7 +14,7 @@ const Circle = styled.div`
   width: var(--width);
   height: var(--width);
 `
-const Title = styled.div`
+const Title = styled(animated.div)`
   position: absolute;
   aspect-ratio: 1/1;
   min-width: ${({ diameter }) => diameter / 3}px;
@@ -32,8 +33,6 @@ const Title = styled.div`
   font-size: 1rem;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 10px 10px 20px ${({ theme }) => theme.secondaryDarkShadow},
-    -10px -10px 20px ${({ theme }) => theme.secondaryLightShadow};
 `
 const Item = styled(animated.div)`
   position: absolute;
@@ -57,7 +56,16 @@ const CircularMenu = ({ icons, title, diameter }) => {
   const itemsRef = useRef([])
   const shown = useRef(false)
   const [spin, spinAPI] = useSprings(icons.length, (i) => ({}))
-
+  const [style, mouseUp, mouseDown] = useClickAnimation(
+    {
+      boxShadow: `10px 10px 20px ${theme.secondaryDarkShadow},
+    -10px -10px 20px ${theme.secondaryLightShadow}`,
+    },
+    {
+      boxShadow: ` inset 10px 10px 20px ${theme.secondaryDarkShadow},
+    inset -10px -10px 20px ${theme.secondaryLightShadow}`,
+    }
+  )
   const items = icons.map((Icon, i, arr) => (
     <Item
       position={i}
@@ -109,7 +117,14 @@ const CircularMenu = ({ icons, title, diameter }) => {
 
   return (
     <Circle n={items.length} theme={theme} diameter={diameter}>
-      <Title theme={theme} diameter={diameter} onClick={runAnimation}>
+      <Title
+        theme={theme}
+        diameter={diameter}
+        onClick={runAnimation}
+        style={style}
+        onMouseDown={mouseDown}
+        onMouseUp={mouseUp}
+      >
         <span>{title}</span>
         <Waypoint onEnter={handleEnter} topOffset="20%" bottomOffset="20%" />
       </Title>
