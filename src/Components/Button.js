@@ -15,6 +15,7 @@ const Container = styled(animated.div)`
   cursor: pointer;
   padding: 1rem;
   border-radius: 10px;
+  -webkit-tap-highlight-color: transparent;
   & span,
   svg {
     vertical-align: middle;
