@@ -3,7 +3,7 @@ import { ThemeContext } from "../themeContext"
 import { useContext } from "react"
 import { useSpring, animated, config } from "@react-spring/web"
 import { Waypoint } from "react-waypoint"
-
+import useClickAnimation from "../useClickAnimation"
 import useWindowDimensions from "../useWindowDimensions"
 
 const Container = styled.div`
@@ -21,7 +21,7 @@ const Container = styled.div`
     margin: 2rem 0;
   }
 `
-const Header = styled.div`
+const Header = styled(animated.div)`
   background: ${({ theme }) => theme.primary};
   color: ${({ theme }) => theme.light};
   font-family: ${({ theme }) => theme.fontfamily1};
@@ -65,6 +65,16 @@ const Body = styled(animated.div)`
 const BulletPoint = ({ title, content, className, align }) => {
   const { theme } = useContext(ThemeContext)
   const { width } = useWindowDimensions()
+  const [style, unpress, press] = useClickAnimation(
+    {
+      boxShadow: `15px 15px 30px ${theme.primaryDarkShadow},
+    -15px -15px 30px ${theme.primaryLightShadow}`,
+    },
+    {
+      boxShadow: `inset 15px 15px 30px ${theme.primaryDarkShadow},
+    inset -15px -15px 30px ${theme.primaryLightShadow}`,
+    }
+  )
 
   const [animation, api] = useSpring(() => ({
     opacity: 0,
@@ -92,7 +102,15 @@ const BulletPoint = ({ title, content, className, align }) => {
   return (
     <Container theme={theme} className={className} align={align}>
       {title && (
-        <Header theme={theme} align={align}>
+        <Header
+          theme={theme}
+          align={align}
+          style={style}
+          onMouseDown={press}
+          onMouseUp={unpress}
+          onTouchStart={press}
+          onTouchEnd={unpress}
+        >
           {title}
         </Header>
       )}
