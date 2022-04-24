@@ -24,7 +24,7 @@ const Header = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  ${({ end }) => end && "order:2;"}
+  ${({ align }) => align === "end" && "order:2;"}
 `
 const Button = styled.div`
   background: ${({ theme, active }) =>
@@ -52,14 +52,15 @@ const Body = styled.div`
   /* position: relative; */
   /* padding: 1rem; */
   flex-grow: 1;
-  ${({ end }) => (end ? "margin-right:1rem;" : "margin-left:1rem;")}
+  ${({ align }) =>
+    align === "end" ? "margin-right:1rem;" : "margin-left:1rem;"}
 `
 const Title = styled.div`
   font-size: 1.2rem;
   position: absolute;
   padding: 1rem;
   bottom: 0;
-  ${({ end }) => (end ? "left:0;" : "right:0;")}
+  ${({ align }) => (align === "end" ? "left:0;" : "right:0;")}
   border-radius: 5px;
   background-color: ${({ theme }) => theme.secondary};
   color: ${({ theme }) => theme.light};
@@ -93,7 +94,7 @@ const Card = ({
   title,
   className,
   preview,
-  end,
+  align,
   description,
   codeLink,
   siteLink,
@@ -107,7 +108,7 @@ const Card = ({
 
   return (
     <Container theme={theme} className={className}>
-      <Header end={end}>
+      <Header align={align}>
         <Button
           theme={theme}
           onClick={switchSection}
@@ -136,7 +137,7 @@ const Card = ({
         </Button>
       </Header>
 
-      <Body theme={theme} end={end}>
+      <Body theme={theme} align={align}>
         {section === 1 && (
           <a href={siteLink} target="_blank" rel="noreferrer noopener">
             <Preview src={preview} alt={title} />
@@ -148,7 +149,7 @@ const Card = ({
           </Description>
         )}
         <Title
-          end={end}
+          align={align}
           theme={theme}
           as="a"
           href={siteLink}

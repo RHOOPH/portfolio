@@ -33,7 +33,7 @@ const About = () => {
             content="Scrimba Coursera Udemy freecodecamp Youtube W3School, you name it, been there, done that."
           />
           <BulletPoint
-            end
+            align="end"
             title="Confident"
             content="It took me a long time to feel that way."
           />
@@ -42,7 +42,7 @@ const About = () => {
             content="New version? New library? New way of doing things? Oh! Hold me back."
           />
           <BulletPoint
-            end
+            align="end"
             title="Optimise"
             content={
               <div>
@@ -64,7 +64,7 @@ const About = () => {
             content="Trust me, I'm working on it. One day this will go away."
           />
           <BulletPoint
-            end
+            align="end"
             title="What do I want the most?"
             content={
               <div>

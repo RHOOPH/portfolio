@@ -10,7 +10,7 @@ const defaultTheme = {
   secondary: "#1E3A45",
   secondaryDarkShadow: "#172d35",
   secondaryLightShadow: "#254755",
-  fontfamily1: '"Righteous", cursive',
+  fontfamily1: '"Righteous", sans-serif',
   fontfamily2: '"Inter",sans-serif',
 }
 

@@ -110,7 +110,7 @@ const CircularMenu = ({ icons, title, diameter }) => {
     <Circle n={items.length} theme={theme} diameter={diameter}>
       <Title theme={theme} diameter={diameter} onClick={runAnimation}>
         <span>{title}</span>
-        <Waypoint onEnter={handleEnter} />
+        <Waypoint onEnter={handleEnter} topOffset="20%" bottomOffset="20%" />
       </Title>
 
       {items}
