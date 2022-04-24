@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { ThemeContext } from "../themeContext"
 import { useContext, useState } from "react"
 import { ReactComponent as ExtLink } from "../assets/external-link.svg"
+import Button from "./Button"
 
 const Container = styled.div`
   display: flex;
@@ -25,28 +26,6 @@ const Header = styled.div`
   justify-content: center;
 
   ${({ align }) => align === "end" && "order:2;"}
-`
-const Button = styled.div`
-  background: ${({ theme, active }) =>
-    active ? theme.primary : theme.secondary};
-  color: ${({ theme }) => theme.light};
-  font-family: ${({ theme }) => theme.fontfamily2};
-  /* letter-spacing: 0.15em; */
-  margin: 0.5em 0;
-  text-align: center;
-  width: 100%;
-  text-decoration: none;
-
-  box-shadow: 4px 4px 8px ${({ theme }) => theme.secondaryDarkShadow},
-    -4px -4px 8px ${({ theme }) => theme.secondaryLightShadow};
-
-  cursor: pointer;
-  padding: 1rem;
-  border-radius: 10px;
-  & span,
-  svg {
-    vertical-align: middle;
-  }
 `
 const Body = styled.div`
   /* position: relative; */
@@ -109,25 +88,14 @@ const Card = ({
   return (
     <Container theme={theme} className={className}>
       <Header align={align}>
-        <Button
-          theme={theme}
-          onClick={switchSection}
-          id={1}
-          active={section === 1}
-        >
+        <Button onClick={switchSection} id={1} active={section === 1}>
           Preview
         </Button>
-        <Button
-          theme={theme}
-          onClick={switchSection}
-          id={2}
-          active={section === 2}
-        >
+        <Button onClick={switchSection} id={2} active={section === 2}>
           Description
         </Button>
         <Button
           as="a"
-          theme={theme}
           href={codeLink}
           target="_blank"
           rel="noreferrer noopener"
