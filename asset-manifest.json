@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/portfolio/static/js/main.23d8fa9e.js",
+    "main.js": "/portfolio/static/js/main.61454f2b.js",
     "static/media/Screenshot-E-cart.png": "/portfolio/static/media/Screenshot-E-cart.e38df9f088b15bd16e7e.png",
     "static/media/Screenshot-React-Ekart.png": "/portfolio/static/media/Screenshot-React-Ekart.25a93b817a7ff3fc74cd.png",
     "static/media/Screenshot-Quiz-App.png": "/portfolio/static/media/Screenshot-Quiz-App.164c9d627fd26161914b.png",
@@ -18,9 +18,9 @@
     "static/media/figma.svg": "/portfolio/static/media/figma.aa8b47f4f6e0492ecbf8bd8df5f2243f.svg",
     "static/media/css3.svg": "/portfolio/static/media/css3.638c48149d955d57b307a9357ac5060c.svg",
     "static/media/external-link.svg": "/portfolio/static/media/external-link.d8e1b598a88b532b34819155b082639c.svg",
-    "main.23d8fa9e.js.map": "/portfolio/static/js/main.23d8fa9e.js.map"
+    "main.61454f2b.js.map": "/portfolio/static/js/main.61454f2b.js.map"
   },
   "entrypoints": [
-    "static/js/main.23d8fa9e.js"
+    "static/js/main.61454f2b.js"
   ]
 }
