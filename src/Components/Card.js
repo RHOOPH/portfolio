@@ -3,7 +3,7 @@ import { ThemeContext } from "../themeContext"
 import { useContext, useRef, useState, useEffect } from "react"
 import { ReactComponent as ExtLink } from "../assets/external-link.svg"
 import Button from "./Button"
-import { useTransition, animated } from "@react-spring/web"
+import { useTransition, animated, config } from "@react-spring/web"
 
 const Container = styled.div`
   display: flex;
@@ -93,11 +93,21 @@ const Card = ({
     from: {
       position: "absolute",
       opacity: 0,
-      y: section === PREVIEW ? -218 : 218,
+      y: section === PREVIEW ? -218 / 2 : 218 / 2,
+      scaleY: 0,
     },
-    enter: { opacity: 1, y: 0 },
-    leave: { opacity: 0, y: section === PREVIEW ? 218 : -218 },
+    enter: {
+      opacity: 1,
+      y: 0,
+      scaleY: 1,
+    },
+    leave: {
+      opacity: 0,
+      y: section === PREVIEW ? 218 / 2 : -218 / 2,
+      scaleY: 0,
+    },
     immediate: firstRender.current,
+    config: { friction: 40 },
   })
 
   useEffect(() => {
