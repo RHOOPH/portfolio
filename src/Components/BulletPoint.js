@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import { ThemeContext } from "../themeContext"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState, useRef } from "react"
 import { useSpring, animated, config } from "@react-spring/web"
 import { Waypoint } from "react-waypoint"
 import useClickAnimation from "../useClickAnimation"
 import useWindowDimensions from "../useWindowDimensions"
-
+import useWindowWidthThreshold from "../useWindowWidthThreshold"
 const Container = styled.div`
   display: flex;
 
@@ -64,10 +64,28 @@ const Body = styled(animated.div)`
 
 const BulletPoint = ({ title, content, className, align }) => {
   const { theme } = useContext(ThemeContext)
-  const { width } = useWindowDimensions()
+  const isFirstRender = useRef(true)
+  const isNarrowDevice = useWindowWidthThreshold(670)
   const [show, setShow] = useState(false)
-  const [narrowDevice, setNarrowDevice] = useState({})
-  const [wideDevice, setWideDevice] = useState({})
+
+  const narrowStyle = {
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    config: config.slow,
+    reverse: !show,
+    immediate: isFirstRender.current,
+  }
+  const wideStyle = {
+    from: {
+      x: align === "end" ? "100%" : "-100%",
+      opacity: 0,
+      scaleX: 0,
+    },
+    to: { x: "0%", opacity: 1, scaleX: 1 },
+    config: config.slow,
+    reverse: !show,
+    immediate: isFirstRender.current,
+  }
 
   const [style, unpress, press] = useClickAnimation(
     {
@@ -79,32 +97,16 @@ const BulletPoint = ({ title, content, className, align }) => {
     inset -15px -15px 30px ${theme.primaryLightShadow}`,
     }
   )
+
   title === "Curious" &&
-    (width < 670 ? console.log(narrowDevice) : console.log(wideDevice))
-  const narrowDeviceAnimation = useSpring(narrowDevice)
-  const wideDeviceAnimation = useSpring(wideDevice)
+    console.log("isNarrowDevice=", isNarrowDevice, " show=", show)
+
+  const narrowDeviceAnimation = useSpring(narrowStyle)
+  const wideDeviceAnimation = useSpring(wideStyle)
 
   useEffect(() => {
-    title === "Curious" &&
-      console.log("useEffectRan with width=%d show=%d,", width, show)
-    width < 670
-      ? setNarrowDevice({
-          from: { opacity: 0 },
-          to: { opacity: 1 },
-          config: config.slow,
-          reverse: !show,
-        })
-      : setWideDevice({
-          from: {
-            x: align === "end" ? "100%" : "-100%",
-            opacity: 0,
-            scaleX: 0,
-          },
-          to: { x: "0%", opacity: 1, scaleX: 1 },
-          config: config.slow,
-          reverse: !show,
-        })
-  }, [width < 670, show, align])
+    isFirstRender.current = false
+  }, [])
   return (
     <Container theme={theme} className={className} align={align}>
       {title && (
@@ -116,7 +118,7 @@ const BulletPoint = ({ title, content, className, align }) => {
           onMouseUp={unpress}
           onTouchStart={press}
           onTouchEnd={unpress}
-          {...(width < 670 ? {} : { onClick: () => setShow((p) => !p) })}
+          {...(isNarrowDevice ? {} : { onClick: () => setShow((p) => !p) })}
         >
           {title}
         </Header>
@@ -131,7 +133,7 @@ const BulletPoint = ({ title, content, className, align }) => {
         >
           <Body
             theme={theme}
-            style={width < 670 ? narrowDeviceAnimation : wideDeviceAnimation}
+            style={isNarrowDevice ? narrowDeviceAnimation : wideDeviceAnimation}
           >
             {content}
           </Body>
