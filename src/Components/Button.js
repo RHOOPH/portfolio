@@ -26,10 +26,13 @@ export default function Button({ children, active, ...props }) {
     {
       boxShadow: `4px 4px 8px ${theme.secondaryDarkShadow},
     -4px -4px 8px ${theme.secondaryLightShadow}`,
+      scale: 1,
     },
     {
       boxShadow: ` inset 4px 4px 8px ${theme.secondaryDarkShadow},
-    inset -4px -4px 8px ${theme.secondaryLightShadow}`,
+    inset -4px -4px 8px ${theme.secondaryLightShadow}
+    `,
+      scale: 0.97,
     }
   )
   useEffect(() => {
