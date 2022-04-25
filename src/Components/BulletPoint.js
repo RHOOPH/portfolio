@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { ThemeContext } from "../themeContext"
-import { useContext } from "react"
+import { useContext, useRef, useState } from "react"
 import { useSpring, animated, config } from "@react-spring/web"
 import { Waypoint } from "react-waypoint"
 import useClickAnimation from "../useClickAnimation"
@@ -65,6 +65,8 @@ const Body = styled(animated.div)`
 const BulletPoint = ({ title, content, className, align }) => {
   const { theme } = useContext(ThemeContext)
   const { width } = useWindowDimensions()
+  const [show, setShow] = useState(false)
+
   const [style, unpress, press] = useClickAnimation(
     {
       boxShadow: `15px 15px 30px ${theme.primaryDarkShadow},
@@ -77,27 +79,47 @@ const BulletPoint = ({ title, content, className, align }) => {
   )
 
   const [animation, api] = useSpring(() => ({
+    from: {
+      opacity: 0,
+      x: width < 670 ? 0 : align === "end" ? "100%" : "-100%",
+      scaleX: width < 670 ? 1 : 0,
+    },
     opacity: 0,
-    x: 0,
-
-    scaleX: 1,
+    x: width < 670 ? 0 : align === "end" ? "100%" : "-100%",
+    scaleX: width < 670 ? 1 : 0,
   }))
 
   const runAnimation = (reverse) => {
-    const narrowDeviceStyle = {
-      from: { opacity: 0 },
-      to: { opacity: 1 },
-      config: config.slow,
-      reverse: reverse,
-    }
-    const wideDeviceStyle = {
-      from: { x: align === "end" ? "100%" : "-100%", opacity: 0, scaleX: 0 },
-      to: { x: "0%", opacity: 1, scaleX: 1 },
-      config: config.slow,
-      reverse: reverse,
-    }
+    setShow(!reverse)
+    const narrowDeviceStyle = reverse
+      ? { to: { opacity: 0 }, config: config.slow }
+      : {
+          to: { opacity: 1 },
+          config: config.slow,
+        }
+    const wideDeviceStyle = reverse
+      ? {
+          to: {
+            x: align === "end" ? "100%" : "-100%",
+            opacity: 0,
+            scaleX: 0,
+          },
+          config: config.slow,
+        }
+      : {
+          to: { x: "0%", opacity: 1, scaleX: 1 },
+          config: config.slow,
+        }
 
     api.start(width < 670 ? narrowDeviceStyle : wideDeviceStyle)
+    console.log(
+      "animation ran with ",
+      width < 670 ? narrowDeviceStyle : wideDeviceStyle
+    )
+  }
+  const handleClick = () => {
+    console.log("clicked with show=", show)
+    runAnimation(show)
   }
   return (
     <Container theme={theme} className={className} align={align}>
@@ -110,6 +132,7 @@ const BulletPoint = ({ title, content, className, align }) => {
           onMouseUp={unpress}
           onTouchStart={press}
           onTouchEnd={unpress}
+          {...(width < 670 ? {} : { onClick: handleClick })}
         >
           {title}
         </Header>
