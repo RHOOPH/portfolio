@@ -45,7 +45,7 @@ export default function Button({ children, active, ...props }) {
       {...(active === undefined && {
         onMouseDown: () => clicked(),
         onMouseUp: () => unclicked(),
-        ontouchstart: () => clicked(),
+        onTouchStart: () => clicked(),
         onTouchEnd: () => unclicked(),
       })}
     >
