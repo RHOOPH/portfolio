@@ -1,8 +1,9 @@
 import styled from "styled-components"
 import { ThemeContext } from "../themeContext"
-import { useContext, useState } from "react"
+import { useContext, useRef, useState, useEffect } from "react"
 import { ReactComponent as ExtLink } from "../assets/external-link.svg"
 import Button from "./Button"
+import { useTransition, animated } from "@react-spring/web"
 
 const Container = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const Header = styled.div`
   ${({ align }) => align === "end" && "order:2;"}
 `
 const Body = styled.div`
-  /* position: relative; */
+  position: relative;
   /* padding: 1rem; */
   flex-grow: 1;
   ${({ align }) =>
@@ -39,6 +40,7 @@ const Title = styled.div`
   position: absolute;
   padding: 1rem;
   bottom: 0;
+
   ${({ align }) => (align === "end" ? "left:0;" : "right:0;")}
   border-radius: 5px;
   background-color: ${({ theme }) => theme.secondary};
@@ -47,20 +49,23 @@ const Title = styled.div`
   letter-spacing: 0.15em;
   cursor: pointer;
   text-decoration: none;
+  z-index: 5;
   & span,
   svg {
     vertical-align: middle;
   }
 `
-const Preview = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
+const Preview = styled(animated.a)`
   border-radius: 5px;
+  height: 100%;
+  display: inline-block;
+  overflow: hidden;
   cursor: pointer;
+  & img {
+    width: 100%;
+  }
 `
-const Description = styled.div`
+const Description = styled(animated.div)`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.light};
@@ -68,6 +73,8 @@ const Description = styled.div`
   padding: 1em;
   border-radius: 5px;
 `
+const PREVIEW = "Preview"
+const DESC = "Description"
 
 const Card = ({
   title,
@@ -79,19 +86,45 @@ const Card = ({
   siteLink,
 }) => {
   const { theme } = useContext(ThemeContext)
-  const [section, setSection] = useState(1)
+  const [section, setSection] = useState(PREVIEW)
+  const firstRender = useRef(true)
 
-  const switchSection = (e) => {
-    setSection(parseInt(e.target.id))
-  }
+  const transitions = useTransition(section, {
+    from: {
+      position: "absolute",
+      opacity: 0,
+      y: section === PREVIEW ? -218 : 218,
+    },
+    enter: { opacity: 1, y: 0 },
+    leave: { opacity: 0, y: section === PREVIEW ? 218 : -218 },
+    immediate: firstRender.current,
+  })
 
+  useEffect(() => {
+    firstRender.current = false
+  }, [])
+  title === "Quiz Time" && console.log("rendered")
   return (
     <Container theme={theme} className={className}>
+      <Title
+        align={align}
+        theme={theme}
+        as="a"
+        href={siteLink}
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <span>{title}</span>
+        <ExtLink height="16" width="16" fill={theme.light} />
+      </Title>
       <Header align={align}>
-        <Button onClick={switchSection} id={1} active={section === 1}>
+        <Button
+          onClick={() => setSection(PREVIEW)}
+          active={section === PREVIEW}
+        >
           Preview
         </Button>
-        <Button onClick={switchSection} id={2} active={section === 2}>
+        <Button onClick={() => setSection(DESC)} active={section === DESC}>
           Description
         </Button>
         <Button
@@ -106,27 +139,22 @@ const Card = ({
       </Header>
 
       <Body theme={theme} align={align}>
-        {section === 1 && (
-          <a href={siteLink} target="_blank" rel="noreferrer noopener">
-            <Preview src={preview} alt={title} />
-          </a>
+        {transitions((style, section) =>
+          section === PREVIEW ? (
+            <Preview
+              href={siteLink}
+              target="_blank"
+              rel="noreferrer noopener"
+              style={style}
+            >
+              <img src={preview} alt={title} />
+            </Preview>
+          ) : (
+            <Description theme={theme} style={style}>
+              <div>{description}</div>
+            </Description>
+          )
         )}
-        {section === 2 && (
-          <Description theme={theme}>
-            <div>{description}</div>
-          </Description>
-        )}
-        <Title
-          align={align}
-          theme={theme}
-          as="a"
-          href={siteLink}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <span>{title}</span>
-          <ExtLink height="16" width="16" fill={theme.light} />
-        </Title>
       </Body>
     </Container>
   )
