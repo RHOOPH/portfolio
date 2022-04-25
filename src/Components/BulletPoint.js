@@ -4,8 +4,8 @@ import { useContext, useEffect, useState, useRef } from "react"
 import { useSpring, animated, config } from "@react-spring/web"
 import { Waypoint } from "react-waypoint"
 import useClickAnimation from "../useClickAnimation"
-import useWindowDimensions from "../useWindowDimensions"
 import useWindowWidthThreshold from "../useWindowWidthThreshold"
+
 const Container = styled.div`
   display: flex;
 
@@ -21,7 +21,7 @@ const Container = styled.div`
     margin: 2rem 0;
   }
 `
-const Header = styled(animated.div)`
+const Bullet = styled(animated.div)`
   background: ${({ theme }) => theme.primary};
   color: ${({ theme }) => theme.light};
   font-family: ${({ theme }) => theme.fontfamily1};
@@ -65,27 +65,6 @@ const Body = styled(animated.div)`
 const BulletPoint = ({ title, content, className, align }) => {
   const { theme } = useContext(ThemeContext)
   const isFirstRender = useRef(true)
-  const isNarrowDevice = useWindowWidthThreshold(670)
-  const [show, setShow] = useState(false)
-
-  const narrowStyle = {
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: config.slow,
-    reverse: !show,
-    immediate: isFirstRender.current,
-  }
-  const wideStyle = {
-    from: {
-      x: align === "end" ? "100%" : "-100%",
-      opacity: 0,
-      scaleX: 0,
-    },
-    to: { x: "0%", opacity: 1, scaleX: 1 },
-    config: config.slow,
-    reverse: !show,
-    immediate: isFirstRender.current,
-  }
 
   const [style, unpress, press] = useClickAnimation(
     {
@@ -98,8 +77,28 @@ const BulletPoint = ({ title, content, className, align }) => {
     }
   )
 
-  title === "Curious" &&
-    console.log("isNarrowDevice=", isNarrowDevice, " show=", show)
+  const isNarrowDevice = useWindowWidthThreshold(670)
+  const [show, setShow] = useState(false)
+
+  const narrowStyle = {
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    config: config.slow,
+    reverse: !show,
+    immediate: isFirstRender.current,
+  }
+
+  const wideStyle = {
+    from: {
+      x: align === "end" ? "100%" : "-100%",
+      opacity: 0,
+      scaleX: 0,
+    },
+    to: { x: "0%", opacity: 1, scaleX: 1 },
+    config: config.slow,
+    reverse: !show,
+    immediate: isFirstRender.current,
+  }
 
   const narrowDeviceAnimation = useSpring(narrowStyle)
   const wideDeviceAnimation = useSpring(wideStyle)
@@ -110,7 +109,7 @@ const BulletPoint = ({ title, content, className, align }) => {
   return (
     <Container theme={theme} className={className} align={align}>
       {title && (
-        <Header
+        <Bullet
           theme={theme}
           align={align}
           style={style}
@@ -121,7 +120,7 @@ const BulletPoint = ({ title, content, className, align }) => {
           {...(isNarrowDevice ? {} : { onClick: () => setShow((p) => !p) })}
         >
           {title}
-        </Header>
+        </Bullet>
       )}
       {content && (
         <Waypoint
