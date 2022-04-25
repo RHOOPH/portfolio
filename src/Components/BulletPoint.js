@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { ThemeContext } from "../themeContext"
-import { useContext, useRef, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useSpring, animated, config } from "@react-spring/web"
 import { Waypoint } from "react-waypoint"
 import useClickAnimation from "../useClickAnimation"
@@ -66,6 +66,8 @@ const BulletPoint = ({ title, content, className, align }) => {
   const { theme } = useContext(ThemeContext)
   const { width } = useWindowDimensions()
   const [show, setShow] = useState(false)
+  const [narrowDevice, setNarrowDevice] = useState({})
+  const [wideDevice, setWideDevice] = useState({})
 
   const [style, unpress, press] = useClickAnimation(
     {
@@ -77,50 +79,32 @@ const BulletPoint = ({ title, content, className, align }) => {
     inset -15px -15px 30px ${theme.primaryLightShadow}`,
     }
   )
+  title === "Curious" &&
+    (width < 670 ? console.log(narrowDevice) : console.log(wideDevice))
+  const narrowDeviceAnimation = useSpring(narrowDevice)
+  const wideDeviceAnimation = useSpring(wideDevice)
 
-  const [animation, api] = useSpring(() => ({
-    from: {
-      opacity: 0,
-      x: width < 670 ? 0 : align === "end" ? "100%" : "-100%",
-      scaleX: width < 670 ? 1 : 0,
-    },
-    opacity: 0,
-    x: width < 670 ? 0 : align === "end" ? "100%" : "-100%",
-    scaleX: width < 670 ? 1 : 0,
-  }))
-
-  const runAnimation = (reverse) => {
-    setShow(!reverse)
-    const narrowDeviceStyle = reverse
-      ? { to: { opacity: 0 }, config: config.slow }
-      : {
+  useEffect(() => {
+    title === "Curious" &&
+      console.log("useEffectRan with width=%d show=%d,", width, show)
+    width < 670
+      ? setNarrowDevice({
+          from: { opacity: 0 },
           to: { opacity: 1 },
           config: config.slow,
-        }
-    const wideDeviceStyle = reverse
-      ? {
-          to: {
+          reverse: !show,
+        })
+      : setWideDevice({
+          from: {
             x: align === "end" ? "100%" : "-100%",
             opacity: 0,
             scaleX: 0,
           },
-          config: config.slow,
-        }
-      : {
           to: { x: "0%", opacity: 1, scaleX: 1 },
           config: config.slow,
-        }
-
-    api.start(width < 670 ? narrowDeviceStyle : wideDeviceStyle)
-    console.log(
-      "animation ran with ",
-      width < 670 ? narrowDeviceStyle : wideDeviceStyle
-    )
-  }
-  const handleClick = () => {
-    console.log("clicked with show=", show)
-    runAnimation(show)
-  }
+          reverse: !show,
+        })
+  }, [width < 670, show, align])
   return (
     <Container theme={theme} className={className} align={align}>
       {title && (
@@ -132,20 +116,23 @@ const BulletPoint = ({ title, content, className, align }) => {
           onMouseUp={unpress}
           onTouchStart={press}
           onTouchEnd={unpress}
-          {...(width < 670 ? {} : { onClick: handleClick })}
+          {...(width < 670 ? {} : { onClick: () => setShow((p) => !p) })}
         >
           {title}
         </Header>
       )}
       {content && (
         <Waypoint
-          onEnter={() => runAnimation(false)}
+          onEnter={() => setShow(true)}
           bottomOffset="20%"
-          onLeave={() => runAnimation(true)}
+          onLeave={() => setShow(false)}
           topOffset="20%"
           fireOnRapidScroll={false}
         >
-          <Body theme={theme} style={animation}>
+          <Body
+            theme={theme}
+            style={width < 670 ? narrowDeviceAnimation : wideDeviceAnimation}
+          >
             {content}
           </Body>
         </Waypoint>
