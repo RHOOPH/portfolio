@@ -1,13 +1,7 @@
 import styled from "styled-components"
 import { ThemeContext } from "../themeContext"
 import { useContext } from "react"
-import {
-  useSpring,
-  animated,
-  config,
-  useChain,
-  useSpringRef,
-} from "@react-spring/web"
+import { useSprings, animated, config } from "@react-spring/web"
 
 const Box = styled.div`
   position: relative;
@@ -56,7 +50,6 @@ const LName = styled(animated.div)`
 `
 
 const Quote = styled(animated.div)`
-  font-family: ${({ theme }) => theme.fontfamily2};
   grid-area: quote;
   align-self: end;
   width: 15ch;
@@ -65,51 +58,49 @@ const Quote = styled(animated.div)`
 `
 const Hero = () => {
   const { theme } = useContext(ThemeContext)
-  const ref1 = useSpringRef()
-  const anime1 = useSpring({
-    from: { rotateZ: 90, x: 100, scale: 0 },
-    to: [
-      { scale: 2, delay: 500 },
-      { rotateZ: 0, scale: 1 },
-      { x: 0, scale: 1 },
-    ],
-    config: config.slow,
-    ref: ref1,
-  })
-  const ref2 = useSpringRef()
-  const anime2 = useSpring({
-    from: { transformOrigin: "center", x: 100, scale: 2, rotateX: 90, y: 0 },
-    to: [
-      { scale: 2, rotateX: 0, y: 0 },
-      { scale: 1, x: 0, y: 0 },
-    ],
-    config: config.slow,
-    ref: ref2,
-  })
-  const ref3 = useSpringRef()
-  const anime3 = useSpring({
-    from: { x: 100, scale: 0 },
-    to: [{ scale: 1 }, { x: 0 }],
-    ref: ref3,
-  })
-  const ref4 = useSpringRef()
-  const anime4 = useSpring({
-    from: { x: 100, scale: 0 },
-    to: [{ scale: 1 }, { x: 0 }],
-    ref: ref4,
-  })
-  useChain([ref1, ref2, ref3, ref4], [0, 0.75, 1.25, 1.5], 2000)
+
+  const animations = useSprings(4, [
+    {
+      from: { rotateZ: 90, x: 100, scale: 0 },
+      to: [{ scale: 2, delay: 500 }, { rotateZ: 0, scale: 1 }, { x: 0 }],
+      config: config.slow,
+    },
+    {
+      from: { x: 100, scale: 2, rotateX: 90 },
+      to: [{ rotateX: 0 }, { scale: 1, x: 0 }],
+      config: config.slow,
+      delay: 1500,
+    },
+    {
+      from: { x: 100, scale: 0 },
+      to: [{ scale: 1 }, { x: 0 }],
+      delay: 2500,
+    },
+    {
+      from: { x: 100, scale: 0 },
+      to: [{ scale: 1 }, { x: 0 }],
+      delay: 3000,
+    },
+  ])
 
   return (
     <>
       <Box theme={theme}>
-        <Hey style={anime1}>
+        <Hey style={animations[0]}>
           <div>HEY</div>
         </Hey>
-        <I style={anime2}>I'm</I>
-        <FName style={anime3}>Kowshik</FName>
-        <LName style={anime3}>Achar</LName>
-        <Quote style={anime4}>An Aspiring Front End Developer</Quote>
+        <I style={animations[1]} theme={theme}>
+          I'm
+        </I>
+        <FName style={animations[2]} theme={theme}>
+          Kowshik
+        </FName>
+        <LName style={animations[2]} theme={theme}>
+          Achar
+        </LName>
+        <Quote style={animations[3]} theme={theme}>
+          An Aspiring Front End Developer
+        </Quote>
       </Box>
     </>
   )
