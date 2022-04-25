@@ -4,7 +4,7 @@ export default function useClickAnimation(
   unpressedStyleObject,
   pressedStyleObject
 ) {
-  const [click, clickAPI] = useSpring(() => unpressedStyleObject)
+  const [style, clickAPI] = useSpring(() => unpressedStyleObject)
 
   const press = (e) => {
     clickAPI.start({
@@ -16,9 +16,8 @@ export default function useClickAnimation(
   const unpress = (e) => {
     clickAPI.start({
       to: unpressedStyleObject,
-
       immediate: true,
     })
   }
-  return [click, unpress, press]
+  return [style, unpress, press]
 }

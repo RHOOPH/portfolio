@@ -103,7 +103,6 @@ const Card = ({
   useEffect(() => {
     firstRender.current = false
   }, [])
-  title === "Quiz Time" && console.log("rendered")
   return (
     <Container theme={theme} className={className}>
       <Title
@@ -120,19 +119,17 @@ const Card = ({
       <Header align={align}>
         <Button
           onClick={() => setSection(PREVIEW)}
-          active={section === PREVIEW}
+          active={section === PREVIEW ? "true" : "false"}
         >
           Preview
         </Button>
-        <Button onClick={() => setSection(DESC)} active={section === DESC}>
+        <Button
+          onClick={() => setSection(DESC)}
+          active={section === DESC ? "true" : "false"}
+        >
           Description
         </Button>
-        <Button
-          as="a"
-          href={codeLink}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
+        <Button href={codeLink} target="_blank" rel="noreferrer noopener">
           <span>Code </span>
           <ExtLink height="16" width="16" fill={theme.light} />
         </Button>

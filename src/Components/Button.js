@@ -1,17 +1,16 @@
 import styled from "styled-components"
-import { animated, useSpring } from "@react-spring/web"
+import { animated } from "@react-spring/web"
 import { ThemeContext } from "../themeContext"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
+import useClickAnimation from "../useClickAnimation"
 
-const Container = styled(animated.div)`
+const Container = styled(animated.a)`
   color: ${({ theme }) => theme.light};
   font-family: ${({ theme }) => theme.fontfamily2};
   margin: 0.5em 0;
   text-align: center;
   width: 100%;
   text-decoration: none;
-  box-shadow: 4px 4px 8px ${({ theme }) => theme.secondaryDarkShadow},
-    -4px -4px 8px ${({ theme }) => theme.secondaryLightShadow};
   cursor: pointer;
   padding: 1rem;
   border-radius: 10px;
@@ -23,11 +22,33 @@ const Container = styled(animated.div)`
 `
 export default function Button({ children, active, ...props }) {
   const { theme } = useContext(ThemeContext)
-  const switchAnimation = useSpring({
-    backgroundColor: active ? theme.primary : theme.secondary,
-  })
+  const [style, unclicked, clicked] = useClickAnimation(
+    {
+      boxShadow: `4px 4px 8px ${theme.secondaryDarkShadow},
+    -4px -4px 8px ${theme.secondaryLightShadow}`,
+    },
+    {
+      boxShadow: ` inset 4px 4px 8px ${theme.secondaryDarkShadow},
+    inset -4px -4px 8px ${theme.secondaryLightShadow}`,
+    }
+  )
+  useEffect(() => {
+    if (active === "true") clicked()
+    if (active === "false") unclicked()
+  }, [active])
+
   return (
-    <Container {...props} theme={theme} style={switchAnimation}>
+    <Container
+      {...props}
+      theme={theme}
+      style={style}
+      {...(active === undefined && {
+        onMouseDown: () => clicked(),
+        onMouseUp: () => unclicked(),
+        ontouchstart: () => clicked(),
+        onTouchEnd: () => unclicked(),
+      })}
+    >
       {children}
     </Container>
   )
